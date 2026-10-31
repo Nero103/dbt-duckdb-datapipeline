@@ -1,0 +1,7 @@
+sources:
+  - name: raw
+    tables:
+      - name: job_postings
+        description: one row per scrapped job posting, it is raw from the data pipeline.
+        config:
+          external_location: '../data/raw/raw_job_postings_*.parquet'
