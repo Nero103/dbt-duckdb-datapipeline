@@ -7,47 +7,62 @@ models:
         columns: true
     columns:
       - name: job_id
-        description: this is the scraper's posting id, re-scrapped pstings repeat the id
+        description: This is the scraper's posting id, re-scrapped pstings repeat the id
       - name: job_title
-        description: posting title as scrapped
+        description: Posting title as scrapped
       - name: company_name
-        description: employer name as scrapped
+        description: Employer name as scrapped
       - name: job_location
-        description: posting location as scrapped
+        description: Posting location as scrapped
       - name: job_via
-        description: posting platform as scrapped (e.g., via LinkedIn)
+        description: Posting platform as scrapped (e.g., via LinkedIn)
       - name: job_schedule_type
-        description: schedule as posted
+        description: Schedule as posted
       - name: job_work_from_home
-        description: true when posting is flagged remote
+        description: True when posting is flagged remote
       - name: search_date
-        description: date of scrap
+        description: Date of scrap
       - name: search_term
-        description: role scraper seached for
+        description: Role scraper seached for
 
   - name: jobs_per_month
-    description: monthly posting counts by row
+    description: Monthly posting counts by row
     config:
       persist_docs:
         relation: true
         columns: true
     columns:
       - name: month
-        description: posting month, truncated by search_date
+        description: Posting month, truncated by search_date
       - name: role
-        description: search role, from search_term
+        description: Search role, from search_term
       - name: postings
-        description: postings counted for the role that matched
+        description: Postings counted for the role that matched
 
   - name: top_locations
-    description: top 10 location by posting count
+    description: Top 10 location by posting count
     config:
       persist_docs:
         relation: true
         columns: true
     columns:
       - name: job_location
-        description: posting location by grain
+        description: Posting location by grain
       - name: postings
-        description: postings counted for the location
-      
+        description: Postings counted for the location
+  
+  - name: monthly_summary
+    description: Monthly summary of job postings, one row per month
+    config:
+      persist_docs:
+        relation: true
+        columns: true
+    columns:
+      - name: month
+        description: Month of summary
+      - name: total_postings
+        description: All postings that month (summed from jobs_per_month)
+      - name: remote_postings
+        description: Postings flagged remote that month
+      - name: pct_remote
+        description: Share of month postings that are remote
