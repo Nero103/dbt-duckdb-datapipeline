@@ -10,6 +10,8 @@ models:
         description: This is the scraper's posting id, re-scrapped pstings repeat the id
       - name: job_title
         description: Posting title as scrapped
+        data_tests:
+          - not_null
       - name: company_name
         description: Employer name as scrapped
       - name: job_location
@@ -60,6 +62,9 @@ models:
     columns:
       - name: month
         description: Month of summary
+        data_tests:
+          - unique
+          - not_null
       - name: total_postings
         description: All postings that month (summed from jobs_per_month)
       - name: remote_postings
