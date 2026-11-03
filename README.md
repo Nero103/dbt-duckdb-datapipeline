@@ -1,4 +1,9 @@
-# Automated Job Market Pipeline V01 | dbt & DuckDB
+# Automated Job Market Pipeline | dbt & DuckDB
+
+[![dbt Build & Publish](https://github.com/Nero103/dbt-duckdb-datapipeline/actions/workflows/dbt_build.yml/badge.svg)](https://github.com/Nero103/dbt-duckdb-datapipeline/actions/workflows/dbt_build.yml)
+![dbt](https://img.shields.io/badge/dbt-Analytics_Engineering-FF694B?logo=dbt&logoColor=white)
+![DuckDB](https://img.shields.io/badge/DuckDB-Data_Warehouse-FFF000?logo=duckdb&logoColor=black)
+![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-Automated-2088FF?logo=githubactions&logoColor=white)
 
 ![dbt pipeline diagram](img/dbt_pipeline.png)
 
@@ -38,6 +43,8 @@ Also, the dbt features doing the work:
 | Environments | local `dev` vs CI `prod` targets ([`ci/profiles.yml`](ci/profiles.yml)) |
 
 `dbt build` compiles SQL, materializes models, and fails the run if any test fails — same command locally and in CI.
+
+**Independent SQL Enhancement:** Extended the `monthly_summary` model with `COALESCE()` and `NULLIF()` to handle missing values from joins, prevent division by zero errors, and improve the reliability of monthly remote job-posting calculations.
 
 ---
 
