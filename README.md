@@ -50,7 +50,7 @@ Also, the dbt features doing the work:
 
 ## 🚀 Production
 
-GitHub Actions runs the whole pipeline, no laptop required: [`.github/workflows/dbt_build.yml`](.github/workflows/dbt_build.yml)
+GitHub Actions automatically builds, tests, and publishes the DuckDB warehouse on every push to `master` and through a scheduled weekly run. The workflow downloads the source data, executes `dbt build` using the production profile, and publishes the resulting `prod.duckdb` database as a GitHub Release asset: [`.github/workflows/dbt_build.yml`](.github/workflows/dbt_build.yml)
 
 | Trigger | What happens |
 | --- | --- |
@@ -89,7 +89,9 @@ SELECT * FROM monthly_summary;
 
 ## 📖 Docs
 
-Docs are generated with `dbt docs generate` and published to GitHub Pages:
+dbt documentation is generated using `dbt docs generate` and hosted through GitHub Pages. The documentation includes model lineage, column descriptions, and data quality tests.
+
+Unlike the automated warehouse builds, documentation updates are published separately when the generated documentation files are committed to the repository:
 
 **→ [nero103.github.io/dbt-duckdb-datapipeline/](https://nero103.github.io/dbt-duckdb-datapipeline/)**
 
