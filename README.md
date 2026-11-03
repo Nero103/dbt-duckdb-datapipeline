@@ -23,7 +23,7 @@ A public dbt and DuckDB pipeline over 692k real job postings, rebuilt and republ
 | **Public CI** | build + test + publish on every push | [Actions workflow](https://github.com/Nero103/dbt-duckdb-datapipeline/actions/workflows/dbt_build.yml) |
 | **Environments** | local `dev` vs CI `prod` targets | [`ci/profiles.yml`](ci/profiles.yml) |
 | **Published warehouse** | one `ATTACH`, queryable by anyone | [Query it](https://github.com/Nero103/dbt-duckdb-datapipeline/releases/download/warehouse/prod.duckdb) |
-
+| **Company Remote Hiring Mart** | Independently built `remote_jobs_by_company` to calculate total postings, distinct job titles, remote postings, and remote-work percentages by company | [`remote_jobs_by_company.sql`](analytics/models/remote_jobs_by_company.sql) |
 ---
 
 ## ⚙️ The dbt Pipeline
@@ -44,7 +44,15 @@ Also, the dbt features doing the work:
 
 `dbt build` compiles SQL, materializes models, and fails the run if any test fails — same command locally and in CI.
 
-**Independent SQL Enhancement:** Extended the `monthly_summary` model with `COALESCE()` and `NULLIF()` to handle missing values from joins, prevent division by zero errors, and improve the reliability of monthly remote job-posting calculations.
+### Independent Enhancement: Remote Hiring by Company
+
+Extended the guided dbt project with an independently designed `remote_jobs_by_company` mart to compare remote hiring activity across companies.
+
+The model calculates total posting records, distinct job titles, remote posting counts, and remote-work percentages using SQL aggregations, CTEs, and `COALESCE()` / `NULLIF()` for handling missing values and division by zero.
+
+**Data consideration:** Counts represent scraped job posting records.
+
+The model includes `unique` and `not_null` data tests on `company_name`.
 
 ---
 

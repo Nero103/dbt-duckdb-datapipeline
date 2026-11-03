@@ -71,3 +71,25 @@ models:
         description: Postings flagged remote that month
       - name: pct_remote
         description: Share of month postings that are remote
+
+  - name: remote_jobs_by_company
+    description: Remote job postings by location, one row per month
+    config:
+      persist_docs:
+        relation: true
+        columns: true
+    columns:
+      - name: company_name
+        description: Company name of job posted
+        data_tests:
+          - unique
+          - not_null
+      - name: total_postings
+        description: All postings from that company (summed from jobs_postings)
+      - name: unique_job_title
+        description: Unique job titles (summed from jobs_postings)
+      - name: remote_posts
+        description: Postings flagged remote at that company
+      - name: pct_remote_posts
+        description: Share of postings that are remote at that company      
+
